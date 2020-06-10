@@ -74,7 +74,25 @@ toString() {
 */
 
 class Car {
-
+  constructor(model, milesPerGallon){
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+  fill (gallons) {
+   this.tank = this.tank + gallons;
+}
+drive(distance){
+  if (this.tank * this.milesPerGallon > distance){ //if tank is more than distance traveled.............
+    this.odometer += distance; //adds the distance to odometer
+    this.tank -= distance / this.milesPerGallon; //subtracts gallons from the tank. taking distance dividing by mpg. if tank is 20 miles per gallon and traveled 60 miles. it takes 3 gallons from tank.
+  }else{
+    this.odometer += this.tank * this.milesPerGallon; // adding the to odometer
+    this.tank = 0; //empty tank
+  }
+  return `I ran out of fuel at ${this.odometer} miles`; //returning the odometer reading when tank is empty
+}
 }
 
 /*
